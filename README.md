@@ -10,3 +10,10 @@ The repository https://github.com/CTISM-Prof-Henry/gitEssentials is already conf
 ```bash
 sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
 ```
+
+Generate PDF:
+
+```bash
+make latex
+pdflatex <name of file>
+```
