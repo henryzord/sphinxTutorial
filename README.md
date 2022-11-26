@@ -57,7 +57,12 @@ export PATH="./node_modules/.bin:$PATH"
 
 7. Convert markdown to RST: https://cloudconvert.com/md-to-rst
 8. Install 
+9. Instal latexmk and pdflatex: 
 
+   ```bash
+   sudo apt-get install latexmk
+   sudo apt-get install pdflatex
+   ```
 
 ## Usage
 
@@ -74,3 +79,9 @@ make latex
 cd build/latex
 pdflatex <name of file>
 ```
+
+You'll have to do some additional configuration if using pdflatext o generate pdf:
+
+Install babel for Brazilian Portuguese (if that's the case):
+
+```tlmgr install babel-portuges```
