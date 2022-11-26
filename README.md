@@ -57,9 +57,10 @@ export PATH="./node_modules/.bin:$PATH"
 
 7. Convert markdown to RST: https://cloudconvert.com/md-to-rst
 8. Install 
-9. Instal latexmk and pdflatex: 
+9. Instal latex tools: 
 
    ```bash
+   sudo apt-get install texlive-full
    sudo apt-get install latexmk
    sudo apt-get install pdflatex
    ```
