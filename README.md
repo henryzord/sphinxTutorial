@@ -248,7 +248,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
 Follow the steps below to generate documentation with Sphinx on either Linux or Windows.
 
 <details>
-    <summary><b>Using on Windows</b></summary>
+    <summary><h3>Using on Windows</h3></summary>
 
 Generating mermaid graphs and latex files/pdf is currently unavailable on Windows. Rather, use instructions below to 
 generate html documentation:
@@ -276,7 +276,7 @@ generate html documentation:
 </details>
 
 <details>
-    <summary><b>Using on Linux</b></summary>
+    <summary><h3>Using on Linux</h3></summary>
 
 3. To Generate PDF with pdflatex:
 
