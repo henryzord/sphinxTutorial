@@ -19,7 +19,8 @@ Follow the steps below to install Sphinx on either Linux or Windows.
 
 ### Installation for Windows
 
-1. **(optional - only for this tutorial)** On `.gitignore`, at the bottom of the document, change these lines
+1. **(optional - only for this tutorial)** Fork this repository on Github, and then clone it to your machine 
+2. **(optional - only for this tutorial)** On `.gitignore`, at the bottom of the document, change these lines
 
    ```.gitignore
    # SPHINX TUTORIAL: comment lines below
@@ -43,30 +44,30 @@ Follow the steps below to install Sphinx on either Linux or Windows.
    # SPHINX TUTORIAL: comment lines above
    ```
 
-2. Download and install Python Anaconda: https://www.anaconda.com/products/distribution
-3. [Add conda to PATH](https://www.mathworks.com/matlabcentral/answers/94933-how-do-i-edit-my-system-path-in-windows)
+3. Download and install Python Anaconda: https://www.anaconda.com/products/distribution
+4. [Add conda to PATH](https://www.mathworks.com/matlabcentral/answers/94933-how-do-i-edit-my-system-path-in-windows)
    * This can be done either through the Installation Wizard, or after installation (though it's easier using the Wizard)
    * Add the path where conda was installed to User's PATH variable
-4. Open a command line (`Windows + R` keys, type `cmd`, hit `Enter`)
-5. Create a new conda environment: 
+5. Open a command line (`Windows + R` keys, type `cmd`, hit `Enter`)
+6. Create a new conda environment: 
 
    ```bash
    conda create --name sphinx pip --yes
    ```
 
-6. Activate it:
+7. Activate it:
 
    ```bash
    conda activate sphinx
    ```
    
-7. Install libraries:
+8. Install libraries:
 
    ```bash
    pip install --requirement requirements.txt
    ```
 
-8. Run sphinx-quickstart:
+9. Run sphinx-quickstart:
 
    ```bash
    sphinx-quickstart
@@ -81,12 +82,12 @@ Follow the steps below to install Sphinx on either Linux or Windows.
    * Insert a project release number (e.g. `0.1`, `0.2`, `1.0`, etc)
    * Insert project's language. For brazilian Portuguese, use `pt_BR` 
 
-9. Follow now the [Sphinx Tutorial](https://www.sphinx-doc.org/en/master/usage/quickstart.html) on how to prepare
-   `.rst` files. This tutorial will not teach you how to create RestructuredText files, but you can find a cheatsheet 
-   [here](https://github.com/ralsina/rst-cheatsheet/blob/master/rst-cheatsheet.rst). This tutorial will also
-   proceed with the files as they were created by `sphinx-quickstart`.
+10. Follow now the [Sphinx Tutorial](https://www.sphinx-doc.org/en/master/usage/quickstart.html) on how to prepare
+    `.rst` files. This tutorial will not teach you how to create RestructuredText files, but you can find a cheatsheet 
+    [here](https://github.com/ralsina/rst-cheatsheet/blob/master/rst-cheatsheet.rst). This tutorial will also
+    proceed with the files as they were created by `sphinx-quickstart`.
 
-10. We need to modify `make.bat` to add two new `make` commands:
+11. We need to modify `make.bat` to add two new `make` commands:
     * `make github`: generates html files and moves to `docs` folder;
     * `remove_latex_files`: removes previous latex files from `build/latex` folder (LaTeX can render wrong pdfs if old
       files are not removed)
@@ -153,12 +154,12 @@ Follow the steps below to install Sphinx on either Linux or Windows.
     popd
     ```
 
-11. To properly deploy html files to GitHub pages, add a `.nojekyll` file to `docs` folder.
+12. To properly deploy html files to GitHub pages, add a `.nojekyll` file to `docs` folder.
     * Check the spelling! The name of the file must be exactly `.nojekyll` (no blank spaces)
-12. Enable GitHub pages for your repository. See **Publishing from a branch** on 
+13. Enable GitHub pages for your repository. See **Publishing from a branch** on 
     [this tutorial](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
     for a step-by-step tutorial. Make sure that you use the folder `docs` for the documentation!
-13. Run `make github` from the command line, and then commit/push changes to remote to verify if all is working properly.
+14. Run `make github` from the command line, and then commit/push changes to remote to verify if all is working properly.
 
 ### Installation for Linux
 
