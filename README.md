@@ -13,13 +13,24 @@ mine. The requirements I have are:
 The repository https://github.com/CTISM-Prof-Henry/gitEssentials complies with above requirements, and was done following
 this repository's tutorial. Use it as reference.
 
+## Pre-requisites
+
+This tutorial makes some assumptions on your previous knowledge. More specifically, it assumes that you have previous
+knowledge on:
+
+* GitHub;
+* git;
+* Windows and/or Linux command line;
+* Python and its flavor Anaconda.
+
 ## Installation
 
 Follow the steps below to install Sphinx on either Linux or Windows.
 
-### Installation for Windows
+<details>
+    <summary><h3>Installation for Windows</h3></summary>
 
-1. **(optional - only for this tutorial)** Fork this repository on Github, and then clone it to your machine 
+1. **(optional - only for this tutorial)** Fork this repository on GitHub, and then clone it to your machine 
 2. **(optional - only for this tutorial)** On `.gitignore`, at the bottom of the document, change these lines
 
    ```.gitignore
@@ -48,46 +59,47 @@ Follow the steps below to install Sphinx on either Linux or Windows.
 4. [Add conda to PATH](https://www.mathworks.com/matlabcentral/answers/94933-how-do-i-edit-my-system-path-in-windows)
    * This can be done either through the Installation Wizard, or after installation (though it's easier using the Wizard)
    * Add the path where conda was installed to User's PATH variable
-5. Open a command line (`Windows + R` keys, type `cmd`, hit `Enter`)
-6. Create a new conda environment: 
+5. Open a command line window (`Windows + R` keys, type `cmd`, hit `Enter`)
+6. Navigate to this repository's folder with `cd` (e.g. `cd C:\Users\username\sphinxTutorial`)
+7. Create a new conda environment: 
 
    ```bash
    conda create --name sphinx pip --yes
    ```
 
-7. Activate it:
+8. Activate it:
 
    ```bash
    conda activate sphinx
    ```
    
-8. Install libraries:
+9. Install libraries:
 
    ```bash
    pip install --requirement requirements.txt
    ```
 
-9. Run sphinx-quickstart:
+10. Run sphinx-quickstart:
 
-   ```bash
-   sphinx-quickstart
-   ```
+    ```bash
+    sphinx-quickstart
+    ```
    
-   You'll be prompted to answer some questions:
+    You'll be prompted to answer some questions:
 
-   * For this tutorial, I personally prefer to separate build and docs folders, so I would choose `y` in the 
-     *Separate source and build directories (y/n):* question. But you can do otherwise in future projects.
-   * Insert a project name. For this tutorial, we will use **sphinxTutorial**
-   * Insert your (full) name
-   * Insert a project release number (e.g. `0.1`, `0.2`, `1.0`, etc)
-   * Insert project's language. For brazilian Portuguese, use `pt_BR` 
+    * For this tutorial, I personally prefer to separate build and docs folders, so I would choose `y` in the 
+      *Separate source and build directories (y/n):* question. But you can do otherwise in future projects.
+    * Insert a project name. For this tutorial, we will use **sphinxTutorial**
+    * Insert your (full) name
+    * Insert a project release number (e.g. `0.1`, `0.2`, `1.0`, etc)
+    * Insert project's language. For brazilian Portuguese, use `pt_BR` 
 
-10. Follow now the [Sphinx Tutorial](https://www.sphinx-doc.org/en/master/usage/quickstart.html) on how to prepare
+11. Follow now the [Sphinx Tutorial](https://www.sphinx-doc.org/en/master/usage/quickstart.html) on how to prepare
     `.rst` files. This tutorial will not teach you how to create RestructuredText files, but you can find a cheatsheet 
     [here](https://github.com/ralsina/rst-cheatsheet/blob/master/rst-cheatsheet.rst). This tutorial will also
     proceed with the files as they were created by `sphinx-quickstart`.
 
-11. We need to modify `make.bat` to add two new `make` commands:
+12. We need to modify `make.bat` to add two new `make` commands:
     * `make github`: generates html files and moves to `docs` folder;
     * `remove_latex_files`: removes previous latex files from `build/latex` folder (LaTeX can render wrong pdfs if old
       files are not removed)
@@ -154,91 +166,117 @@ Follow the steps below to install Sphinx on either Linux or Windows.
     popd
     ```
 
-12. To properly deploy html files to GitHub pages, add a `.nojekyll` file to `docs` folder.
+13. To properly deploy html files to GitHub pages, create a `docs` folder, and add a `.nojekyll` file inside it
     * Check the spelling! The name of the file must be exactly `.nojekyll` (no blank spaces)
-13. Enable GitHub pages for your repository. See **Publishing from a branch** on 
+14. Enable GitHub pages for your repository. See **Publishing from a branch** on 
     [this tutorial](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
     for a step-by-step tutorial. Make sure that you use the folder `docs` for the documentation!
-14. Run `make github` from the command line, and then commit/push changes to remote to verify if all is working properly.
+15. Run `make github` from the command line, and then commit/push changes to remote to verify if all is working properly.
 
-### Installation for Linux
+</details>
+
+<details>
+    <summary><h3>Installation for Linux</h3></summary>
 
 1. First install sphinx:
 
-```bash
-apt-get install python3-sphinx
-```
+   ```bash
+   apt-get install python3-sphinx
+   ```
 
 2. Then run a configuration command:
 
-```bash
-sphinx-quickstart
-```
+   ```bash
+   sphinx-quickstart
+   ```
 
-More information in [this link](https://www.sphinx-doc.org/en/master/usage/quickstart.html). **(and yes, you should read these docs!)**
+   More information in [this link](https://www.sphinx-doc.org/en/master/usage/quickstart.html). 
+   **(and yes, you should read these docs!)**
 
-3. If you're using mermaid graphs, you need to install an adequate library, [sphinxcontrib-mermaid](https://github.com/mgaitan/sphinxcontrib-mermaid):
+3. If you're using mermaid graphs, you need to install an adequate library, 
+   [sphinxcontrib-mermaid](https://github.com/mgaitan/sphinxcontrib-mermaid):
 
-```bash
-pip install sphinxcontrib-mermaid
-```
+   ```bash
+   pip install sphinxcontrib-mermaid
+   ```
 
 4. For publishing sphinx documentation to Github Pages, follow this tutorial: [link](https://www.docslikecode.com/articles/github-pages-python-sphinx/) 
-  * Some configuration files could be founded in [this](https://github.com/annegentle/create-demo) repository 
+   * Some configuration files could be founded in [this](https://github.com/annegentle/create-demo) repository 
 5. To generate pdf from a sphinx documentation, install [PdfLaTeX](https://gist.github.com/rain1024/98dd5e2c6c8c28f9ea9d):
 
-```bash
-sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
-```
+   ```bash
+   sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
+   ```
 
-Then install mermaid-cli:
+   Then install mermaid-cli:
 
+   ```bash
+   yarn add mermaid.cli
+   ```
 
-```bash
-yarn add mermaid.cli
-```
+   **Note:** if problems are encountering when trying to install with yarn, try this:
 
-**Note:** if problems are encountering when trying to install with yarn, try this:
+   ```bash
+   sudo apt remove cmdtest
+   sudo apt remove yarn
+   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+   echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+   sudo apt-get update
+   sudo apt-get install yarn -y
+   ```
 
-```bash
-sudo apt remove cmdtest
-sudo apt remove yarn
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt-get update
-sudo apt-get install yarn -y
-```
+   And add `mmdc` to PATH:
 
-And add mmdc to PATH:
+   ```bash
+   export PATH="./node_modules/.bin:$PATH" 
+   ```
 
-```bash
-export PATH="./node_modules/.bin:$PATH" 
-```
-
-
-7. Convert markdown to RST: https://cloudconvert.com/md-to-rst
-8. Install 
-9. Instal latex tools: 
+6. Convert markdown to RST: https://cloudconvert.com/md-to-rst
+7. Install 
+8. Instal latex tools: 
 
    ```bash
    sudo apt-get install texlive-full
    sudo apt-get install latexmk
    sudo apt-get install pdflatex
    ```
+   
+</details>
 
 ## Usage
 
-1. Activate sphinx conda environment:
+Follow the steps below to generate documentation with Sphinx on either Linux or Windows.
+
+<details>
+    <summary><b>Using on Windows</b></summary>
+
+Generating mermaid graphs and latex files/pdf is currently unavailable on Windows. Rather, use instructions below to 
+generate html documentation:
+
+1. Open a command line window (`Windows + R` keys, type `cmd`, hit `Enter`)
+2. Navigate to this repository's folder with `cd` (e.g. `cd C:\Users\username\sphinxTutorial`)
+3. Activate sphinx conda environment:
 
    ```bash 
    conda activate sphinx
    ```
 
-2. To generate docs for github:
+4. To generate html files:
+
+   ```bash
+   make html
+   ```
+   
+   Or, alternatively, to generate html files **and** move them to docs folder (for Github pages):
 
    ```bash
    make github
    ```
+
+</details>
+
+<details>
+    <summary><b>Using on Linux</b></summary>
 
 3. To Generate PDF with pdflatex:
 
@@ -254,6 +292,7 @@ Install babel for Brazilian Portuguese (if that's the case):
 
 ```tlmgr install babel-portuges```
 
+</details>
 
 ## Known issues
 
