@@ -312,5 +312,10 @@ into `.rst` documentation.
 
 ## Additional resources
 
+* [Sphinx documentation](https://www.sphinx-doc.org/en/master)
+* [RestructuredText cheatsheet](https://github.com/ralsina/rst-cheatsheet/blob/master/rst-cheatsheet.rst)
+* [GitHub pages](https://pages.github.com/)
+  * [Generating docs from branch](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 * [mermaid documentation](https://mermaid-js.github.io/mermaid/#/)
 * [mermaid live](https://mermaid.live)
+
