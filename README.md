@@ -200,7 +200,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
    pip install sphinxcontrib-mermaid
    ```
 
-4. For publishing sphinx documentation to Github Pages, follow this tutorial: [link](https://www.docslikecode.com/articles/github-pages-python-sphinx/) 
+4. For publishing sphinx documentation to GitHub Pages, follow this tutorial: [link](https://www.docslikecode.com/articles/github-pages-python-sphinx/) 
    * Some configuration files could be founded in [this](https://github.com/annegentle/create-demo) repository 
 5. To generate pdf from a sphinx documentation, install [PdfLaTeX](https://gist.github.com/rain1024/98dd5e2c6c8c28f9ea9d):
 
@@ -233,7 +233,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
 
 6. Convert markdown to RST: https://cloudconvert.com/md-to-rst
 7. Install 
-8. Instal latex tools: 
+8. Install latex tools: 
 
    ```bash
    sudo apt-get install texlive-full
@@ -267,7 +267,7 @@ generate html documentation:
    make html
    ```
    
-   Or, alternatively, to generate html files **and** move them to docs folder (for Github pages):
+   Or, alternatively, to generate html files **and** move them to docs folder (for GitHub pages):
 
    ```bash
    make github
