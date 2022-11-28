@@ -178,69 +178,166 @@ Follow the steps below to install Sphinx on either Linux or Windows.
 <details>
     <summary><h3>Installation for Linux</h3></summary>
 
-1. First install sphinx:
+1. **(optional - only for this tutorial)** Fork this repository on GitHub, and then clone it to your machine 
+2. **(optional - only for this tutorial)** On `.gitignore`, at the bottom of the document, change these lines
 
-   ```bash
-   apt-get install python3-sphinx
+   ```.gitignore
+   # SPHINX TUTORIAL: comment lines below
+   docs/
+   docsource/
+   source/
+   make.bat
+   Makefile
+   # SPHINX TUTORIAL: comment lines above
+   ```
+   
+   to these lines
+
+   ```.gitignore
+   # SPHINX TUTORIAL: comment lines below
+   # docs/
+   # docsource/
+   # source/
+   # make.bat
+   # Makefile
+   # SPHINX TUTORIAL: comment lines above
    ```
 
-2. Then run a configuration command:
+3. Download and install Python Anaconda: https://www.anaconda.com/products/distribution
+   * Make sure to select option to run `conda init` in the process! Otherwise you'll have to install it again
+4. Open a command line window 
+5. Navigate to this repository's folder with `cd` (e.g. `cd /home/henry/sphinxTutorial`)
+6. Create a new conda environment: 
+
+   ```bash
+   conda create --name sphinx pip --yes
+   ```
+
+7. Activate it:
+
+   ```bash
+   conda activate sphinx
+   ```
+   
+8. Install libraries:
+
+   ```bash
+   pip install --requirement requirements.txt
+   ```
+
+9. Run sphinx-quickstart:
 
    ```bash
    sphinx-quickstart
    ```
-
-   More information in [this link](https://www.sphinx-doc.org/en/master/usage/quickstart.html). 
-   **(and yes, you should read these docs!)**
-
-3. If you're using mermaid graphs, you need to install an adequate library, 
-   [sphinxcontrib-mermaid](https://github.com/mgaitan/sphinxcontrib-mermaid):
-
-   ```bash
-   pip install sphinxcontrib-mermaid
-   ```
-
-4. For publishing sphinx documentation to GitHub Pages, follow this tutorial: [link](https://www.docslikecode.com/articles/github-pages-python-sphinx/) 
-   * Some configuration files could be founded in [this](https://github.com/annegentle/create-demo) repository 
-5. To generate pdf from a sphinx documentation, install [PdfLaTeX](https://gist.github.com/rain1024/98dd5e2c6c8c28f9ea9d):
-
-   ```bash
-   sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
-   ```
-
-   Then install mermaid-cli:
-
-   ```bash
-   yarn add mermaid.cli
-   ```
-
-   **Note:** if problems are encountering when trying to install with yarn, try this:
-
-   ```bash
-   sudo apt remove cmdtest
-   sudo apt remove yarn
-   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-   echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-   sudo apt-get update
-   sudo apt-get install yarn -y
-   ```
-
-   And add `mmdc` to PATH:
-
-   ```bash
-   export PATH="./node_modules/.bin:$PATH" 
-   ```
-
-6. Convert markdown to RST: https://cloudconvert.com/md-to-rst
-7. Install 
-8. Install latex tools: 
-
-   ```bash
-   sudo apt-get install texlive-full
-   sudo apt-get install latexmk
-   sudo apt-get install pdflatex
-   ```
    
+   You'll be prompted to answer some questions:
+
+   * For this tutorial, I personally prefer to separate build and docs folders, so I would choose `y` in the 
+     *Separate source and build directories (y/n):* question. But you can do otherwise in future projects.
+   * Insert a project name. For this tutorial, we will use **sphinxTutorial**
+   * Insert your (full) name
+   * Insert a project release number (e.g. `0.1`, `0.2`, `1.0`, etc)
+   * Insert project's language. For brazilian Portuguese, use `pt_BR` 
+
+10. Follow now the [Sphinx Tutorial](https://www.sphinx-doc.org/en/master/usage/quickstart.html) on how to prepare
+    `.rst` files. This tutorial will not teach you how to create RestructuredText files, but you can find a cheatsheet 
+    [here](https://github.com/ralsina/rst-cheatsheet/blob/master/rst-cheatsheet.rst). This tutorial will also
+    proceed with the files as they were created by `sphinx-quickstart`.
+
+11. We need to modify `Makefile` to add two new `make` commands:
+    * `make github`: generates html files and moves to `docs` folder;
+    * `remove_latex_files`: removes previous latex files from `build/latex` folder (LaTeX can render wrong pdfs if old
+      files are not removed)
+
+    Also, you should make sure that `SOURCEDIR` and `BUILDDIR` are set to the right folders:
+   
+    ```bash
+    SOURCEDIR     = source
+    BUILDDIR      = build
+    ```
+
+    Your `Makefile` should look like this:
+
+    ```bash
+    # Minimal makefile for Sphinx documentation
+    #
+    
+    # You can set these variables from the command line, and also
+    # from the environment for the first two.
+    SPHINXOPTS    ?=
+    SPHINXBUILD   ?= sphinx-build
+    SOURCEDIR     = source
+    BUILDDIR      = build
+    
+    # Put it first so that "make" without argument is like "make help".
+    help:
+        @$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+    
+    .PHONY: help Makefile
+    
+    
+    github:
+        @make html
+        @cp -a build/html/. ./docs
+    
+    
+    remove_latex_files:
+        rm -f -r build/latex/*
+    
+    
+    # Catch-all target: route all unknown targets to Sphinx using the new
+    # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
+    %: Makefile
+        @$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+    ```
+
+12. To properly deploy html files to GitHub pages, create a `docs` folder, and add a `.nojekyll` file inside it
+    * Check the spelling! The name of the file must be exactly `.nojekyll` (no blank spaces)
+13. Enable GitHub pages for your repository. See **Publishing from a branch** on 
+    [this tutorial](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
+    for a step-by-step tutorial. Make sure that you use the folder `docs` for the documentation!
+14. Run `make github` from the command line, and then commit/push changes to remote to verify if all is working properly.
+15. To generate mermaid graphs, you need to install [mermaid.cli](https://github.com/mermaid-js/mermaid-cli) locally in 
+    your machine, using [yarn](https://classic.yarnpkg.com/lang/en/docs/install/)
+    
+    ```bash
+    sudo apt-get install yarn
+    yarn add mermaid.cli
+    ```
+
+16. Add `mmdc` to PATH. Run the following command in the terminal (you'll need to repeat it every time you want to 
+    re-generate mermaid graphs):
+
+    ```bash
+    export PATH="./node_modules/.bin:$PATH" 
+    ```
+    
+17. To generate pdfs with latex, install [pdflatex](https://www.math.rug.nl/~trentelman/jacob/pdflatex/pdflatex.html) 
+    and other tools:
+
+    ```bash
+    sudo apt-get install texlive-full
+    sudo apt-get install latexmk
+    sudo apt-get install pdflatex
+    ```
+
+18. Create a new file, `generate_all.sh`, and add these lines:
+
+   ```bash
+   # activate sphinx environment before running this file!
+   # conda activate sphinx
+   export PATH=$PATH:node_modules/.bin
+   mmdc -i docsource/imagens/fork_pull_request_diagrama.mmd -o docsource/imagens/fork_pull_request_diagrama.png
+   mmdc -i docsource/imagens/guia_rapido_diagrama.mmd -o docsource/imagens/guia_rapido_diagrama.png
+   make remove_latex_files
+   make github
+   make latex
+   (cd _build/latex && pdflatex main.tex)
+   (cd _build/latex && pdflatex main.tex)
+   ```
+
 </details>
 
 ## Usage
@@ -309,6 +406,19 @@ mmdc -i some_diagram.mmd -o some_diagram.png
 
 Which will then display the error message (which you should correct). Once all is fixed, include generated `.pngs` 
 into `.rst` documentation.
+
+### Cannot install `mermaid.cli` with yarn
+
+Try to run the following commands:
+
+```bash
+sudo apt remove cmdtest
+sudo apt remove yarn
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update
+sudo apt-get install yarn -y
+```
 
 ## Additional resources
 
