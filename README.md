@@ -313,7 +313,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
     ```bash
     export PATH="./node_modules/.bin:$PATH" 
     ```
-    
+
 17. To generate pdfs with latex, install [pdflatex](https://www.math.rug.nl/~trentelman/jacob/pdflatex/pdflatex.html) 
     and other tools:
 
@@ -337,6 +337,27 @@ Follow the steps below to install Sphinx on either Linux or Windows.
    (cd build/latex && pdflatex main.tex)
    (cd build/latex && pdflatex main.tex)
    ```
+
+   Replace `# mmdc -i some_graph.mmd -o some_graph.png` with a command to generate custom mermaid graphs from `.mmd` 
+   files.
+
+19. Add or append some configurations to `source/conf.py`:
+
+    * General configuration section:
+      * `extensions = ['sphinxcontrib.mermaid']`
+    * Latex configuration section (create one section with comment characters if not present):
+      * `latex_engine = 'pdflatex'
+      * If using Brazilian portuguese, add 
+        ```python
+        latex_elements = {
+             'babel': r'\usepackage[brazil]{babel}'
+        }
+        ```
+      * ```python
+        latex_documents = [
+            (master_doc, 'main.tex', 'Python Essentials', 'Henry Cagnini', 'manual'),
+        ]
+        ``` 
 
 </details>
 
@@ -375,19 +396,39 @@ generate html documentation:
 <details>
     <summary><h3>Using on Linux</h3></summary>
 
-3. To Generate PDF with pdflatex:
+1. Open a command line window 
+2. Navigate to this repository's folder with `cd` (e.g. `cd C:\Users\username\sphinxTutorial`)
+3. Activate sphinx conda environment:
+
+   ```bash 
+   conda activate sphinx
+   ```
+
+4. To generate html files:
+
+   ```bash
+   make html
+   ```
+   
+   Or, alternatively, to generate html files **and** move them to docs folder (for GitHub pages):
+
+   ```bash
+   make github
+   ```
+   
+   Finally, to generate latex files:
 
    ```bash
    make latex
-   cd build/latex
-   pdflatex <name of file>
    ```
+   
+   Then, access folder `build/latex` and compile the document with `pdflatex`:
 
-You'll have to do some additional configuration if using pdflatext o generate pdf:
-
-Install babel for Brazilian Portuguese (if that's the case):
-
-```tlmgr install babel-portuges```
+   ```bash
+   pdflatex <entry tex file>
+   ```
+   
+   Where `<entry tex file>` is the main tex file (e.g. `main.tex`, `pdflatex main.tex`)
 
 </details>
 
