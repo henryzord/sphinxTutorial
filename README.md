@@ -346,7 +346,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
     * General configuration section:
       * `extensions = ['sphinxcontrib.mermaid']`
     * Latex configuration section (create one section with comment characters if not present):
-      * `latex_engine = 'pdflatex'
+      * `latex_engine = 'pdflatex'`
       * If using Brazilian portuguese, add 
         ```python
         latex_elements = {
