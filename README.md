@@ -528,6 +528,19 @@ generate html documentation:
 
 ## Known issues
 
+### makefile says it is missing a separator
+
+`Makefile` uses TAB characters instead of four white spaces. Change all tabulation to use TAB characters to fix this 
+issue.
+
+### `mmdc` not found
+
+Make sure you export `node_modules/.bin"`folder before invoking `mmdc`:
+
+```bash
+export PATH="./node_modules/.bin:$PATH"
+```
+
 ### Mermaid graphs make `make latex` hang forever
 
 This happens because the syntax of the graph is incompatible with the version run by `mmdc`. `mmdc` displays an error
@@ -544,7 +557,7 @@ into `.rst` documentation.
 
 ### Cannot install `mermaid.cli` with yarn
 
-Try to run the following commands:
+Try running the following commands:
 
 ```bash
 sudo apt remove cmdtest
