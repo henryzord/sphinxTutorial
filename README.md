@@ -329,13 +329,13 @@ Follow the steps below to install Sphinx on either Linux or Windows.
    # activate sphinx environment before running this file!
    # conda activate sphinx
    export PATH=$PATH:node_modules/.bin
-   mmdc -i docsource/imagens/fork_pull_request_diagrama.mmd -o docsource/imagens/fork_pull_request_diagrama.png
-   mmdc -i docsource/imagens/guia_rapido_diagrama.mmd -o docsource/imagens/guia_rapido_diagrama.png
+   # add instructions to generate mermaid graphs from files here:
+   # mmdc -i some_graph.mmd -o some_graph.png
    make remove_latex_files
    make github
    make latex
-   (cd _build/latex && pdflatex main.tex)
-   (cd _build/latex && pdflatex main.tex)
+   (cd build/latex && pdflatex main.tex)
+   (cd build/latex && pdflatex main.tex)
    ```
 
 </details>
