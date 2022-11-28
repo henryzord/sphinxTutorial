@@ -40,6 +40,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
    source/
    make.bat
    Makefile
+   generate_all.sh
    # SPHINX TUTORIAL: comment lines above
    ```
    
@@ -52,6 +53,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
    # source/
    # make.bat
    # Makefile
+   # generate_all.sh
    # SPHINX TUTORIAL: comment lines above
    ```
 
@@ -188,6 +190,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
    source/
    make.bat
    Makefile
+   generate_all.sh
    # SPHINX TUTORIAL: comment lines above
    ```
    
@@ -200,6 +203,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
    # source/
    # make.bat
    # Makefile
+   # generate_all.sh
    # SPHINX TUTORIAL: comment lines above
    ```
 
@@ -292,6 +296,13 @@ Follow the steps below to install Sphinx on either Linux or Windows.
         @$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
     ```
+    
+    **VERY IMPORTANT:** make sure to use TAB characters instead of four spaces! Otherwise `make` will display
+    an error like the one below on the screen:
+    
+    ```bash
+    makefile:4: *** missing separator. Stop
+    ```
 
 12. To properly deploy html files to GitHub pages, create a `docs` folder, and add a `.nojekyll` file inside it
     * Check the spelling! The name of the file must be exactly `.nojekyll` (no blank spaces)
@@ -314,7 +325,27 @@ Follow the steps below to install Sphinx on either Linux or Windows.
     export PATH="./node_modules/.bin:$PATH" 
     ```
 
-17. To generate pdfs with latex, install [pdflatex](https://www.math.rug.nl/~trentelman/jacob/pdflatex/pdflatex.html) 
+17. Create a `graph.mmd` file under `source/_figures` folder (create folder if not exists), and add the following code
+    (adapted from [mermaid.live](https://mermaid.live):
+
+    ```mermaid
+    graph TD
+    A[Christmas] -->|Get money| B(Go shopping)
+    B --> C{Let me think}
+    C -->|One| D[Laptop]
+    C -->|Two| E[iPhone]
+    C -->|Three| F[fa:fa-car Car]
+    ```
+
+18. Test if `mmdc` words. Generate a png file with the following command:
+    
+    ```bash
+    mmdc -i source/_figures/graph.mmd -o source/_figures/graph.png
+    ```
+    
+    If the command does not work, see [Known issues](#known-issues) for troubleshooting.
+
+19. To generate pdfs with latex, install [pdflatex](https://www.math.rug.nl/~trentelman/jacob/pdflatex/pdflatex.html) 
     and other tools:
 
     ```bash
@@ -323,14 +354,14 @@ Follow the steps below to install Sphinx on either Linux or Windows.
     sudo apt-get install pdflatex
     ```
 
-18. Create a new file, `generate_all.sh`, and add these lines:
+20. Create a new file, `generate_all.sh`, and add these lines:
 
    ```bash
    # activate sphinx environment before running this file!
    # conda activate sphinx
    export PATH=$PATH:node_modules/.bin
    # add instructions to generate mermaid graphs from files here:
-   # mmdc -i some_graph.mmd -o some_graph.png
+   mmdc -i source/_figures/graph.mmd -o source/_figures/graph.png
    make remove_latex_files
    make github
    make latex
@@ -341,10 +372,11 @@ Follow the steps below to install Sphinx on either Linux or Windows.
    Replace `# mmdc -i some_graph.mmd -o some_graph.png` with a command to generate custom mermaid graphs from `.mmd` 
    files.
 
-19. Add or append some configurations to `source/conf.py`:
+21. Add or append some configurations to `source/conf.py`:
 
     * General configuration section:
       * `extensions = ['sphinxcontrib.mermaid']`
+      * `master_doc = 'index'`
     * Latex configuration section (create one section with comment characters if not present):
       * `latex_engine = 'pdflatex'`
       * If using Brazilian portuguese, add 
@@ -357,7 +389,66 @@ Follow the steps below to install Sphinx on either Linux or Windows.
         latex_documents = [
             (master_doc, 'main.tex', 'Python Essentials', 'Henry Cagnini', 'manual'),
         ]
-        ``` 
+        ```
+        
+   Your `conf.py` should look like more or less like this:
+
+   ```python
+   # Configuration file for the Sphinx documentation builder.
+   #
+   # For the full list of built-in configuration values, see the documentation:
+   # https://www.sphinx-doc.org/en/master/usage/configuration.html
+   
+   # -- Project information -----------------------------------------------------
+   # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+   
+   project = 'sphinxTutorial'
+   copyright = '2022, henryzord'
+   author = 'henryzord'
+   release = '1.0'
+   
+   master_doc = 'index'
+   
+   # -- General configuration ---------------------------------------------------
+   # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+   
+   extensions = ['sphinxcontrib.mermaid']
+   
+   templates_path = ['_templates']
+   exclude_patterns = []
+   
+   language = 'pt_BR'
+   
+   # -- Options for Latex output ---------------------------------------------------
+   # https://www.sphinx-doc.org/en/master/latex.html
+   
+   latex_engine = 'pdflatex'
+   
+   latex_elements = {
+        'babel': r'\usepackage[brazil]{babel}'
+   }
+   
+   latex_documents = [
+       (master_doc, 'main.tex', 'sphinxTutorial', 'henryzord', 'manual'),
+   ]
+   
+   
+   # -- Options for HTML output -------------------------------------------------
+   # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+   
+   html_theme = 'alabaster'
+   html_static_path = ['_static']
+   ```
+
+22. Make latex files, and then compile with pdflatex:
+
+    ```bash
+    make latex
+    cd build/latex
+    pdflatex main.tex
+    ```
+    
+    A `main.pdf` file should now be present in `build/latex`.
 
 </details>
 
@@ -429,6 +520,9 @@ generate html documentation:
    ```
    
    Where `<entry tex file>` is the main tex file (e.g. `main.tex`, `pdflatex main.tex`)
+
+5. Alternatively, just run `bash generate_all.sh` to generate html documentation, move to `dpcs` folder, generate latex 
+   files and compile them to pdf. 
 
 </details>
 
