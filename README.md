@@ -13,15 +13,17 @@ mine. The requirements I have are:
 The repository https://github.com/CTISM-Prof-Henry/gitEssentials complies with above requirements, and was done following
 this repository's tutorial. Use it as reference.
 
-## Pre-requisites
+## Requirements
 
-This tutorial makes some assumptions on your previous knowledge. More specifically, it assumes that you have previous
-knowledge on:
+This tutorial makes some assumptions on your previous knowledge. More specifically, it assumes that you:
 
-* GitHub;
-* git;
-* Windows and/or Linux command line;
-* Python and its flavor Anaconda.
+* Knows how to clone remote git repositories;
+* Knows how to work with git from command line (CLI);
+* Knows how to run command line commands from either Windows or Linux;
+* Knows the very basic of Python programming;
+* Knows how to add variables to System's PATH;
+* **optional** knows how to use virtualenv;
+* **optional** has a GitHub (or other similar service) account.
 
 ## Installation
 
@@ -98,14 +100,14 @@ Follow the steps below to install Sphinx on either Linux or Windows.
     * Insert a project release number (e.g. `0.1`, `0.2`, `1.0`, etc)
     * Insert project's language. For brazilian Portuguese, use `pt_BR` 
 
-11. Follow now the [Sphinx Tutorial](https://www.sphinx-doc.org/en/master/usage/quickstart.html) on how to prepare
+11. Follow now the [Sphinx Documentation](https://www.sphinx-doc.org/en/master/usage/quickstart.html) on how to prepare
     `.rst` files. This tutorial will not teach you how to create RestructuredText files, but you can find a cheatsheet 
     [here](https://github.com/ralsina/rst-cheatsheet/blob/master/rst-cheatsheet.rst). This tutorial will also
     proceed with the files as they were created by `sphinx-quickstart`.
 
 12. We need to modify `make.bat` to add two new `make` commands:
-    * `make github`: generates html files and moves to `docs` folder;
-    * `remove_latex_files`: removes previous latex files from `build/latex` folder (LaTeX can render wrong pdfs if old
+    * `make github`: generates html files and moves them to `docs` folder;
+    * `remove_latex_files`: removes previous LaTeX files from `build/latex` folder (LaTeX can render wrong pdfs if old
       files are not removed)
 
     Also, you should make sure that `SOURCEDIR` and `BUILDDIR` are set to the right folders:
@@ -176,7 +178,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
     [this tutorial](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
     for a step-by-step tutorial. Make sure that you use the folder `docs` for the documentation!
 15. Run `make github` from the command line, and then commit/push changes to remote to verify if all is working properly.
-16. To generate pdfs with latex, install [MiKTex](https://miktex.org/) or other LaTeX tool. It should add `pdflatex` 
+16. To generate pdfs with LaTeX, install [MiKTex](https://miktex.org/) or other LaTeX tool. It should add `pdflatex` 
     automatically to your System's PATH variable.
 17. Create a new file, `generate_all.bat`, and add these lines:
 
@@ -199,10 +201,11 @@ Follow the steps below to install Sphinx on either Linux or Windows.
 
 18. Add or append some configurations to `source/conf.py`:
 
+    * Project information section:
+      * `master_doc = 'index'`
     * General configuration section:
       * `extensions = ['sphinxcontrib.mermaid']`
-      * `master_doc = 'index'`
-    * Latex configuration section (create one section with comment characters if not present):
+    * LaTeX configuration section (create one section with comment characters if not present):
       * `latex_engine = 'pdflatex'`
       * If using Brazilian portuguese, add 
         ```python
@@ -212,60 +215,60 @@ Follow the steps below to install Sphinx on either Linux or Windows.
         ```
       * ```python
         latex_documents = [
-            (master_doc, 'main.tex', 'Python Essentials', 'Henry Cagnini', 'manual'),
+            (master_doc, 'main.tex', 'sphinxTutorial', 'henryzord', 'manual'),
         ]
         ```
         
-   Your `conf.py` should look like more or less like this:
+    Your `conf.py` should look like more or less like this:
 
-   ```python
-   # Configuration file for the Sphinx documentation builder.
-   #
-   # For the full list of built-in configuration values, see the documentation:
-   # https://www.sphinx-doc.org/en/master/usage/configuration.html
-   
-   # -- Project information -----------------------------------------------------
-   # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-   
-   project = 'sphinxTutorial'
-   copyright = '2022, henryzord'
-   author = 'henryzord'
-   release = '1.0'
-   
-   master_doc = 'index'
-   
-   # -- General configuration ---------------------------------------------------
-   # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
-   
-   extensions = ['sphinxcontrib.mermaid']
-   
-   templates_path = ['_templates']
-   exclude_patterns = []
-   
-   language = 'pt_BR'
-   
-   # -- Options for Latex output ---------------------------------------------------
-   # https://www.sphinx-doc.org/en/master/latex.html
-   
-   latex_engine = 'pdflatex'
-   
-   latex_elements = {
-        'babel': r'\usepackage[brazil]{babel}'
-   }
-   
-   latex_documents = [
-       (master_doc, 'main.tex', 'sphinxTutorial', 'henryzord', 'manual'),
-   ]
-   
-   
-   # -- Options for HTML output -------------------------------------------------
-   # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
-   
-   html_theme = 'alabaster'
-   html_static_path = ['_static']
-   ```
+    ```python
+    # Configuration file for the Sphinx documentation builder.
+    #
+    # For the full list of built-in configuration values, see the documentation:
+    # https://www.sphinx-doc.org/en/master/usage/configuration.html
+    
+    # -- Project information -----------------------------------------------------
+    # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+    
+    project = 'sphinxTutorial'
+    copyright = '2022, henryzord'
+    author = 'henryzord'
+    release = '1.0'
+    
+    master_doc = 'index'
+    
+    # -- General configuration ---------------------------------------------------
+    # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+    
+    extensions = ['sphinxcontrib.mermaid']
+    
+    templates_path = ['_templates']
+    exclude_patterns = []
+    
+    language = 'pt_BR'
+    
+    # -- Options for Latex output ---------------------------------------------------
+    # https://www.sphinx-doc.org/en/master/latex.html
+    
+    latex_engine = 'pdflatex'
+    
+    latex_elements = {
+         'babel': r'\usepackage[brazil]{babel}'
+    }
+    
+    latex_documents = [
+        (master_doc, 'main.tex', 'sphinxTutorial', 'henryzord', 'manual'),
+    ]
+    
+    
+    # -- Options for HTML output -------------------------------------------------
+    # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+    
+    html_theme = 'alabaster'
+    html_static_path = ['_static']
+    ```
 
-19. Make latex files, and then compile with pdflatex:
+19. Make LaTeX files, and then compile with pdflatex:
 
     ```bash
     make latex
@@ -346,14 +349,14 @@ Follow the steps below to install Sphinx on either Linux or Windows.
    * Insert a project release number (e.g. `0.1`, `0.2`, `1.0`, etc)
    * Insert project's language. For brazilian Portuguese, use `pt_BR` 
 
-10. Follow now the [Sphinx Tutorial](https://www.sphinx-doc.org/en/master/usage/quickstart.html) on how to prepare
+10. Follow now the [Sphinx Documentation](https://www.sphinx-doc.org/en/master/usage/quickstart.html) on how to prepare
     `.rst` files. This tutorial will not teach you how to create RestructuredText files, but you can find a cheatsheet 
     [here](https://github.com/ralsina/rst-cheatsheet/blob/master/rst-cheatsheet.rst). This tutorial will also
     proceed with the files as they were created by `sphinx-quickstart`.
 
 11. We need to modify `Makefile` to add two new `make` commands:
-    * `make github`: generates html files and moves to `docs` folder;
-    * `remove_latex_files`: removes previous latex files from `build/latex` folder (LaTeX can render wrong pdfs if old
+    * `make github`: generates html files and moves them to `docs` folder;
+    * `remove_latex_files`: removes previous LaTeX files from `build/latex` folder (LaTeX can render wrong pdfs if old
       files are not removed)
 
     Also, you should make sure that `SOURCEDIR` and `BUILDDIR` are set to the right folders:
@@ -400,7 +403,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
     ```
     
     **VERY IMPORTANT:** make sure to use TAB characters instead of four spaces! Otherwise `make` will display
-    an error like the one below on the screen:
+    an error like the one below:
     
     ```bash
     makefile:4: *** missing separator. Stop
@@ -430,7 +433,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
 17. Create a `graph.mmd` file under `source/_figures` folder (create folder if not exists), and add the following code
     (adapted from [mermaid.live](https://mermaid.live):
 
-    ```mermaid
+    ```
     graph TD
     A[Christmas] -->|Get money| B(Go shopping)
     B --> C{Let me think}
@@ -439,7 +442,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
     C -->|Three| F[fa:fa-car Car]
     ```
 
-18. Test if `mmdc` words. Generate a png file with the following command:
+18. Test if `mmdc` works. Generate a png file with the following command:
     
     ```bash
     mmdc -i source/_figures/graph.mmd -o source/_figures/graph.png
@@ -447,7 +450,7 @@ Follow the steps below to install Sphinx on either Linux or Windows.
     
     If the command does not work, see [Known issues](#known-issues) for troubleshooting.
 
-19. To generate pdfs with latex, install [pdflatex](https://www.math.rug.nl/~trentelman/jacob/pdflatex/pdflatex.html) 
+19. To generate pdfs with LaTeX, install [pdflatex](https://www.math.rug.nl/~trentelman/jacob/pdflatex/pdflatex.html) 
     and other tools:
 
     ```bash
@@ -476,10 +479,11 @@ Follow the steps below to install Sphinx on either Linux or Windows.
 
 21. Add or append some configurations to `source/conf.py`:
 
+    * Project information section:
+      * `master_doc = 'index'`
     * General configuration section:
       * `extensions = ['sphinxcontrib.mermaid']`
-      * `master_doc = 'index'`
-    * Latex configuration section (create one section with comment characters if not present):
+    * LaTeX configuration section (create one section with comment characters if not present):
       * `latex_engine = 'pdflatex'`
       * If using Brazilian portuguese, add 
         ```python
@@ -489,60 +493,60 @@ Follow the steps below to install Sphinx on either Linux or Windows.
         ```
       * ```python
         latex_documents = [
-            (master_doc, 'main.tex', 'Python Essentials', 'Henry Cagnini', 'manual'),
+            (master_doc, 'main.tex', 'sphinxTutorial', 'henryzord', 'manual'),
         ]
         ```
         
-   Your `conf.py` should look like more or less like this:
+    Your `conf.py` should look like more or less like this:
 
-   ```python
-   # Configuration file for the Sphinx documentation builder.
-   #
-   # For the full list of built-in configuration values, see the documentation:
-   # https://www.sphinx-doc.org/en/master/usage/configuration.html
-   
-   # -- Project information -----------------------------------------------------
-   # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-   
-   project = 'sphinxTutorial'
-   copyright = '2022, henryzord'
-   author = 'henryzord'
-   release = '1.0'
-   
-   master_doc = 'index'
-   
-   # -- General configuration ---------------------------------------------------
-   # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
-   
-   extensions = ['sphinxcontrib.mermaid']
-   
-   templates_path = ['_templates']
-   exclude_patterns = []
-   
-   language = 'pt_BR'
-   
-   # -- Options for Latex output ---------------------------------------------------
-   # https://www.sphinx-doc.org/en/master/latex.html
-   
-   latex_engine = 'pdflatex'
-   
-   latex_elements = {
-        'babel': r'\usepackage[brazil]{babel}'
-   }
-   
-   latex_documents = [
-       (master_doc, 'main.tex', 'sphinxTutorial', 'henryzord', 'manual'),
-   ]
-   
-   
-   # -- Options for HTML output -------------------------------------------------
-   # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
-   
-   html_theme = 'alabaster'
-   html_static_path = ['_static']
-   ```
+    ```python
+    # Configuration file for the Sphinx documentation builder.
+    #
+    # For the full list of built-in configuration values, see the documentation:
+    # https://www.sphinx-doc.org/en/master/usage/configuration.html
+    
+    # -- Project information -----------------------------------------------------
+    # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+    
+    project = 'sphinxTutorial'
+    copyright = '2022, henryzord'
+    author = 'henryzord'
+    release = '1.0'
+    
+    master_doc = 'index'
+    
+    # -- General configuration ---------------------------------------------------
+    # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+    
+    extensions = ['sphinxcontrib.mermaid']
+    
+    templates_path = ['_templates']
+    exclude_patterns = []
+    
+    language = 'pt_BR'
+    
+    # -- Options for Latex output ---------------------------------------------------
+    # https://www.sphinx-doc.org/en/master/latex.html
+    
+    latex_engine = 'pdflatex'
+    
+    latex_elements = {
+         'babel': r'\usepackage[brazil]{babel}'
+    }
+    
+    latex_documents = [
+        (master_doc, 'main.tex', 'sphinxTutorial', 'henryzord', 'manual'),
+    ]
+    
+    
+    # -- Options for HTML output -------------------------------------------------
+    # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+    
+    html_theme = 'alabaster'
+    html_static_path = ['_static']
+    ```
 
-22. Make latex files, and then compile with pdflatex:
+22. Make LaTeX files, and then compile with pdflatex:
 
     ```bash
     make latex
@@ -585,7 +589,7 @@ done, it is possible to generate html files, publish them to GitHub pages, and g
    make github
    ```
    
-   Finally, to generate latex files:
+   Finally, to generate LaTeX files:
 
    ```bash
    make latex
@@ -600,7 +604,7 @@ done, it is possible to generate html files, publish them to GitHub pages, and g
    Where `<entry tex file>` is the main tex file (e.g. `main.tex`, `pdflatex main.tex`)
 
 5. Alternatively, just run `call generate_all.bat` from command line to generate html documentation, move to `docs` 
-   folder, generate latex files and compile them to pdf. 
+   folder, generate LaTeX files and compile them to pdf. 
 
 </details>
 
@@ -627,7 +631,7 @@ done, it is possible to generate html files, publish them to GitHub pages, and g
    make github
    ```
    
-   Finally, to generate latex files:
+   Finally, to generate LaTeX files:
 
    ```bash
    make latex
@@ -641,7 +645,7 @@ done, it is possible to generate html files, publish them to GitHub pages, and g
    
    Where `<entry tex file>` is the main tex file (e.g. `main.tex`, `pdflatex main.tex`)
 
-5. Alternatively, just run `bash generate_all.sh` to generate html documentation, move to `docs` folder, generate latex 
+5. Alternatively, just run `bash generate_all.sh` to generate html documentation, move to `docs` folder, generate LaTeX 
    files and compile them to pdf. 
 
 </details>
