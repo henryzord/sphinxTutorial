@@ -182,22 +182,22 @@ Follow the steps below to install Sphinx on either Linux or Windows.
     automatically to your System's PATH variable.
 17. Create a new file, `generate_all.bat`, and add these lines:
 
-   ```bash
-   @REM activate sphinx environment before running this file!
-   @REM conda activate sphinx
-   @echo 'Generating HTML files and moving to docs...'
-   @call make.bat github
-   @echo 'Removing old LaTeX files...'
-   @call make.bat remove_latex_files
-   @echo 'Generating new LaTeX files...'
-   @call make.bat latex
-   @echo 'Building PDF...'
-   @cd build\latex
-   @pdflatex main.tex
-   @pdflatex main.tex
-   @cd ..\..
-   @echo 'Success!'
-   ```
+    ```bash
+    @REM activate sphinx environment before running this file!
+    @REM conda activate sphinx
+    @echo 'Generating HTML files and moving to docs...'
+    @call make.bat github
+    @echo 'Removing old LaTeX files...'
+    @call make.bat remove_latex_files
+    @echo 'Generating new LaTeX files...'
+    @call make.bat latex
+    @echo 'Building PDF...'
+    @cd build\latex
+    @pdflatex main.tex
+    @pdflatex main.tex
+    @cd ..\..
+    @echo 'Success!'
+    ```
 
 18. Add or append some configurations to `source/conf.py`:
 
@@ -461,18 +461,18 @@ Follow the steps below to install Sphinx on either Linux or Windows.
 
 20. Create a new file, `generate_all.sh`, and add these lines:
 
-   ```bash
-   # activate sphinx environment before running this file!
-   # conda activate sphinx
-   export PATH=$PATH:node_modules/.bin
-   # add instructions to generate mermaid graphs from files here:
-   mmdc -i source/_figures/graph.mmd -o source/_figures/graph.png
-   make remove_latex_files
-   make github
-   make latex
-   (cd build/latex && pdflatex main.tex)
-   (cd build/latex && pdflatex main.tex)
-   ```
+    ```bash
+    # activate sphinx environment before running this file!
+    # conda activate sphinx
+    export PATH=$PATH:node_modules/.bin
+    # add instructions to generate mermaid graphs from files here:
+    mmdc -i source/_figures/graph.mmd -o source/_figures/graph.png
+    make remove_latex_files
+    make github
+    make latex
+    (cd build/latex && pdflatex main.tex)
+    (cd build/latex && pdflatex main.tex)
+    ```
 
    Replace `# mmdc -i some_graph.mmd -o some_graph.png` with a command to generate custom mermaid graphs from `.mmd` 
    files.
