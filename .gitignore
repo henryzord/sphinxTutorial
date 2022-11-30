@@ -135,4 +135,6 @@ docsource/
 source/
 make.bat
 Makefile
+generate_all.bat
+generate_all.sh
 # SPHINX TUTORIAL: comment lines above

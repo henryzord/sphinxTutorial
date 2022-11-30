@@ -40,6 +40,8 @@ Follow the steps below to install Sphinx on either Linux or Windows.
    source/
    make.bat
    Makefile
+   generate_all.bat
+   generate_all.sh
    # SPHINX TUTORIAL: comment lines above
    ```
    
@@ -52,6 +54,8 @@ Follow the steps below to install Sphinx on either Linux or Windows.
    # source/
    # make.bat
    # Makefile
+   # generate_all.bat
+   # generate_all.sh
    # SPHINX TUTORIAL: comment lines above
    ```
 
@@ -172,6 +176,44 @@ Follow the steps below to install Sphinx on either Linux or Windows.
     [this tutorial](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
     for a step-by-step tutorial. Make sure that you use the folder `docs` for the documentation!
 15. Run `make github` from the command line, and then commit/push changes to remote to verify if all is working properly.
+16. To generate pdfs with latex, install [MiKTex](https://miktex.org/) or other LaTeX tool. It should add `pdflatex` 
+    automatically to your System's PATH variable.
+17. Create a new file, `generate_all.bat`, and add these lines:
+
+   ```bash
+   @REM activate sphinx environment before running this file!
+   @REM conda activate sphinx
+   @echo 'Generating HTML files and moving to docs...'
+   @call make.bat github
+   @echo 'Removing old LaTeX files...'
+   @call make.bat remove_latex_files
+   @echo 'Generating new LaTeX files...'
+   @call make.bat latex
+   @echo 'Building PDF...'
+   @cd build\latex
+   @pdflatex main.tex
+   @pdflatex main.tex
+   @cd ..\..
+   @echo 'Success!'
+   ```
+
+18. Add or append some configurations to `source/conf.py`:
+
+    * General configuration section:
+      * `extensions = ['sphinxcontrib.mermaid']`
+    * Latex configuration section (create one section with comment characters if not present):
+      * `latex_engine = 'pdflatex'`
+      * If using Brazilian portuguese, add 
+        ```python
+        latex_elements = {
+             'babel': r'\usepackage[brazil]{babel}'
+        }
+        ```
+      * ```python
+        latex_documents = [
+            (master_doc, 'main.tex', 'Python Essentials', 'Henry Cagnini', 'manual'),
+        ]
+        ``` 
 
 </details>
 
