@@ -51,13 +51,13 @@ Follow the steps below to install Sphinx on either Linux or Windows.
 
    ```.gitignore
    # SPHINX TUTORIAL: comment lines below
-   docs/
-   docsource/
-   source/
-   make.bat
-   Makefile
-   generate_all.bat
-   generate_all.sh
+   # docs/
+   # docsource/
+   # source/
+   # make.bat
+   # Makefile
+   # generate_all.bat
+   # generate_all.sh
    # SPHINX TUTORIAL: comment lines above
    ```
 
@@ -302,13 +302,13 @@ Follow the steps below to install Sphinx on either Linux or Windows.
 
    ```.gitignore
    # SPHINX TUTORIAL: comment lines below
-   docs/
-   docsource/
-   source/
-   make.bat
-   Makefile
-   generate_all.bat
-   generate_all.sh
+   # docs/
+   # docsource/
+   # source/
+   # make.bat
+   # Makefile
+   # generate_all.bat
+   # generate_all.sh
    # SPHINX TUTORIAL: comment lines above
    ```
 
